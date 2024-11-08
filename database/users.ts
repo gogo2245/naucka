@@ -4,9 +4,6 @@ import sequelize from "./index";
 class User extends Model {
   declare id: string;
   declare email: string;
-  declare role: string;
-  declare name: string;
-  declare surname: string;
   declare passwordHash: string;
   declare createdAt: Date;
 }

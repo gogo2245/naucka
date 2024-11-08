@@ -14,9 +14,13 @@ export default async function handler(
   // Kontrola ci request je validny
   let body;
   try {
-    body = await registerSchema.validate(req.body, { strict: true });
-  } catch (e) {
-    res.status(400).json({ message: "Invalid request body", error: e });
+    body = await registerSchema.validate(req.body, {
+      strict: true,
+      abortEarly: false,
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (e: any) {
+    res.status(400).json({ message: "Invalid request body", error: e.errors });
     return;
   }
   // kontrola ci email nie je pouzity
